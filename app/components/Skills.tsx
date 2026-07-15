@@ -40,18 +40,18 @@ const skillCategories = [
 ]
 
 const techStack = [
-  { name: 'React', icon: '⚛️' },
-  { name: 'Next.js', icon: '▲' },
-  { name: 'TypeScript', icon: '📘' },
-  { name: 'Node.js', icon: '🟢' },
-  { name: 'Python', icon: '🐍' },
-  { name: 'PostgreSQL', icon: '🐘' },
-  { name: 'MongoDB', icon: '🍃' },
-  { name: 'Docker', icon: '🐳' },
-  { name: 'AWS', icon: '☁️' },
-  { name: 'Figma', icon: '🎨' },
-  { name: 'Git', icon: '🌿' },
-  { name: 'Linux', icon: '🐧' },
+  { name: 'React', symbol: '⚛', color: '#61dafb' },
+  { name: 'Next.js', symbol: '▲', color: '#e2e8f0' },
+  { name: 'TypeScript', symbol: 'TS', color: '#3b82f6' },
+  { name: 'Node.js', symbol: 'N⬡', color: '#86efac' },
+  { name: 'Python', symbol: 'Py', color: '#fde68a' },
+  { name: 'PostgreSQL', symbol: 'PG', color: '#60a5fa' },
+  { name: 'MongoDB', symbol: 'M↗', color: '#4ade80' },
+  { name: 'Docker', symbol: '⬡', color: '#38bdf8' },
+  { name: 'AWS', symbol: '⌘', color: '#fb923c' },
+  { name: 'Figma', symbol: 'F◈', color: '#f472b6' },
+  { name: 'Git', symbol: '⎇', color: '#f87171' },
+  { name: 'Linux', symbol: 'λ', color: '#e2e8f0' },
 ]
 
 function SkillBar({ name, level, color, index }: { name: string; level: number; color: string; index: number }) {
@@ -195,11 +195,22 @@ export default function Skills() {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={isInView ? { opacity: 1, scale: 1 } : {}}
                   transition={{ duration: 0.4, delay: 0.3 + i * 0.05, type: 'spring', stiffness: 150 }}
-                  whileHover={{ scale: 1.08, y: -4 }}
-                  className="glass rounded-xl p-4 border border-white/5 hover:border-white/15 text-center group cursor-default transition-all duration-300 hover:bg-white/5"
+                  whileHover={{ scale: 1.06, y: -4 }}
+                  className="glass rounded-xl p-3.5 border border-white/5 text-center group cursor-default transition-all duration-300"
+                  style={{ '--tech-color': tech.color } as React.CSSProperties}
                 >
-                  <div className="text-2xl mb-2">{tech.icon}</div>
-                  <div className="text-white/60 text-xs font-medium group-hover:text-white/90 transition-colors">{tech.name}</div>
+                  <div
+                    className="w-9 h-9 rounded-lg flex items-center justify-center text-sm font-black mx-auto mb-2 transition-all duration-300 group-hover:scale-110"
+                    style={{
+                      background: `${tech.color}15`,
+                      border: `1px solid ${tech.color}30`,
+                      color: tech.color,
+                      fontFamily: 'monospace',
+                    }}
+                  >
+                    {tech.symbol}
+                  </div>
+                  <div className="text-white/50 text-[11px] font-medium group-hover:text-white/85 transition-colors leading-tight">{tech.name}</div>
                 </motion.div>
               ))}
             </div>
