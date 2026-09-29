@@ -1,239 +1,74 @@
 'use client'
 
-import { useRef, useState } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion } from 'framer-motion'
 
-const skillCategories = [
+const groups = [
   {
-    category: 'Frontend',
-    color: '#7c3aed',
-    skills: [
-      { name: 'React / Next.js', level: 92 },
-      { name: 'TypeScript', level: 88 },
-      { name: 'Tailwind CSS', level: 95 },
-      { name: 'Framer Motion', level: 82 },
-      { name: 'Vue.js', level: 75 },
-    ],
+    name: 'Frontend',
+    items: ['React', 'Next.js', 'TypeScript', 'Tailwind', 'Framer Motion', 'Vue'],
   },
   {
-    category: 'Backend',
-    color: '#06b6d4',
-    skills: [
-      { name: 'Node.js', level: 88 },
-      { name: 'Python', level: 80 },
-      { name: 'PostgreSQL', level: 82 },
-      { name: 'MongoDB', level: 85 },
-      { name: 'REST / GraphQL', level: 90 },
-    ],
+    name: 'Backend',
+    items: ['Node.js', 'Python', 'PostgreSQL', 'MongoDB', 'GraphQL', 'REST'],
   },
   {
-    category: 'DevOps & Tools',
-    color: '#f59e0b',
-    skills: [
-      { name: 'Docker', level: 78 },
-      { name: 'Git / GitHub', level: 94 },
-      { name: 'AWS / Vercel', level: 76 },
-      { name: 'Linux', level: 80 },
-      { name: 'CI/CD', level: 74 },
-    ],
+    name: 'Ops',
+    items: ['Docker', 'Git', 'AWS', 'Vercel', 'Linux', 'CI/CD'],
   },
 ]
 
-const techStack = [
-  { name: 'React', symbol: '⚛', color: '#61dafb' },
-  { name: 'Next.js', symbol: '▲', color: '#e2e8f0' },
-  { name: 'TypeScript', symbol: 'TS', color: '#3b82f6' },
-  { name: 'Node.js', symbol: 'N⬡', color: '#86efac' },
-  { name: 'Python', symbol: 'Py', color: '#fde68a' },
-  { name: 'PostgreSQL', symbol: 'PG', color: '#60a5fa' },
-  { name: 'MongoDB', symbol: 'M↗', color: '#4ade80' },
-  { name: 'Docker', symbol: '⬡', color: '#38bdf8' },
-  { name: 'AWS', symbol: '⌘', color: '#fb923c' },
-  { name: 'Figma', symbol: 'F◈', color: '#f472b6' },
-  { name: 'Git', symbol: '⎇', color: '#f87171' },
-  { name: 'Linux', symbol: 'λ', color: '#e2e8f0' },
+const ticker = [
+  'React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 'PostgreSQL',
+  'MongoDB', 'Docker', 'AWS', 'Figma', 'Git', 'Linux', 'GraphQL', 'Prisma',
 ]
-
-function SkillBar({ name, level, color, index }: { name: string; level: number; color: string; index: number }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '-30px' })
-
-  return (
-    <div ref={ref} className="group">
-      <div className="flex justify-between items-center mb-2">
-        <span className="text-white/80 text-sm font-medium group-hover:text-white transition-colors">{name}</span>
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.3 + index * 0.1 }}
-          className="text-xs font-mono"
-          style={{ color }}
-        >
-          {level}%
-        </motion.span>
-      </div>
-      <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
-        <motion.div
-          initial={{ width: 0 }}
-          animate={isInView ? { width: `${level}%` } : {}}
-          transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1], delay: index * 0.1 }}
-          className="h-full rounded-full relative"
-          style={{ background: `linear-gradient(90deg, ${color}, ${color}88)` }}
-        >
-          <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full"
-            style={{ background: color, boxShadow: `0 0 8px ${color}` }}
-          />
-        </motion.div>
-      </div>
-    </div>
-  )
-}
 
 export default function Skills() {
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' })
-  const [activeCategory, setActiveCategory] = useState(0)
-
   return (
-    <section id="skills" ref={sectionRef} className="relative py-32 px-6 overflow-hidden">
-      {/* Background accent */}
-      <div
-        className="absolute right-0 top-1/2 -translate-y-1/2 w-96 h-96 rounded-full pointer-events-none opacity-10"
-        style={{ background: 'radial-gradient(circle, rgba(6,182,212,0.8) 0%, transparent 70%)', filter: 'blur(80px)' }}
-      />
+    <section id="skills" className="relative bg-void/70 text-paper py-24 sm:py-32 overflow-hidden">
+      <div className="px-5 sm:px-8 max-w-7xl mx-auto mb-16 flex items-baseline justify-between">
+        <span className="font-mono text-xs tracking-[0.28em] uppercase text-lime">02 / Skills</span>
+        <span className="font-mono text-xs tracking-[0.28em] uppercase text-paper/35">The toolkit</span>
+      </div>
 
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="mb-20"
-        >
-          <div className="flex items-center gap-4 mb-4">
-            <span className="text-cyan-400/60 font-mono text-sm tracking-[0.3em]">02.</span>
-            <span className="h-px flex-1 max-w-20 bg-gradient-to-r from-cyan-500/50 to-transparent" />
-          </div>
-          <h2 className="text-5xl sm:text-6xl font-black text-white tracking-tight">
-            My <span className="gradient-text">Skills</span>
-          </h2>
-          <p className="text-white/40 mt-4 max-w-lg text-lg">
-            Tools and technologies I wield
-          </p>
-        </motion.div>
-
-        {/* Category tabs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap gap-3 mb-12"
-        >
-          {skillCategories.map((cat, i) => (
-            <button
-              key={cat.category}
-              onClick={() => setActiveCategory(i)}
-              className={`px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
-                activeCategory === i
-                  ? 'text-white'
-                  : 'glass border border-white/10 text-white/50 hover:text-white hover:border-white/20'
-              }`}
-              style={activeCategory === i ? {
-                background: `linear-gradient(135deg, ${cat.color}40, ${cat.color}20)`,
-                border: `1px solid ${cat.color}60`,
-                boxShadow: `0 0 20px ${cat.color}30`,
-              } : {}}
-            >
-              {cat.category}
-            </button>
+      <div className="border-y border-white/10 mb-16 overflow-hidden">
+        <div className="flex marquee-track w-max">
+          {[0, 1].map(copy => (
+            <div key={copy} className="flex items-center py-6">
+              {ticker.map(item => (
+                <span key={`${copy}-${item}`} className="flex items-center">
+                  <span className="px-7 font-headline font-extrabold text-4xl sm:text-6xl text-paper">{item}</span>
+                  <span className="text-lime text-3xl">/</span>
+                </span>
+              ))}
+            </div>
           ))}
-        </motion.div>
-
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Skill bars */}
-          <motion.div
-            key={activeCategory}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="glass rounded-2xl p-8 border border-white/5 card-noise"
-          >
-            <div className="flex items-center gap-3 mb-8">
-              <div
-                className="w-2 h-8 rounded-full"
-                style={{ background: skillCategories[activeCategory].color }}
-              />
-              <h3 className="text-white font-bold text-xl">{skillCategories[activeCategory].category}</h3>
-            </div>
-            <div className="space-y-6">
-              {skillCategories[activeCategory].skills.map((skill, i) => (
-                <SkillBar
-                  key={skill.name}
-                  name={skill.name}
-                  level={skill.level}
-                  color={skillCategories[activeCategory].color}
-                  index={i}
-                />
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Tech stack grid */}
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-white/40 text-sm font-mono tracking-wider uppercase mb-6"
-            >
-              — Full Tech Stack
-            </motion.div>
-            <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
-              {techStack.map((tech, i) => (
-                <motion.div
-                  key={tech.name}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ duration: 0.4, delay: 0.3 + i * 0.05, type: 'spring', stiffness: 150 }}
-                  whileHover={{ scale: 1.06, y: -4 }}
-                  className="glass rounded-xl p-3.5 border border-white/5 text-center group cursor-default transition-all duration-300"
-                  style={{ '--tech-color': tech.color } as React.CSSProperties}
-                >
-                  <div
-                    className="w-9 h-9 rounded-lg flex items-center justify-center text-sm font-black mx-auto mb-2 transition-all duration-300 group-hover:scale-110"
-                    style={{
-                      background: `${tech.color}15`,
-                      border: `1px solid ${tech.color}30`,
-                      color: tech.color,
-                      fontFamily: 'monospace',
-                    }}
-                  >
-                    {tech.symbol}
-                  </div>
-                  <div className="text-white/50 text-[11px] font-medium group-hover:text-white/85 transition-colors leading-tight">{tech.name}</div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Extra info card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="mt-6 glass rounded-xl p-6 border border-violet-500/20 bg-violet-500/5"
-            >
-              <div className="flex items-center gap-3 mb-3">
-                <span className="text-2xl">🎓</span>
-                <span className="text-white font-semibold">Always Learning</span>
-              </div>
-              <p className="text-white/50 text-sm leading-relaxed">
-                Currently exploring AI/ML integration, WebAssembly, and advanced system design patterns.
-                Tech evolves fast — so do I.
-              </p>
-            </motion.div>
-          </div>
         </div>
       </div>
+
+      <div className="px-5 sm:px-8 max-w-7xl mx-auto grid md:grid-cols-3 gap-12">
+        {groups.map((group, i) => (
+          <motion.div
+            key={group.name}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.12 }}
+          >
+            <div className="font-mono text-xs tracking-[0.22em] uppercase text-lime mb-6">{group.name}</div>
+            <ul className="space-y-3">
+              {group.items.map(item => (
+                <li key={item} className="font-headline font-bold text-2xl border-b border-white/8 pb-3">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        ))}
+      </div>
+
+      <p className="px-5 sm:px-8 max-w-7xl mx-auto mt-16 text-paper/45 text-sm max-w-xl">
+        Right now: AI/ML in product surfaces, WebAssembly, and system design that doesn&apos;t fall over.
+      </p>
     </section>
   )
 }
