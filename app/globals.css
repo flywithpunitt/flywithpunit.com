@@ -56,11 +56,21 @@ body {
   to { transform: translateX(-50%); }
 }
 
+@keyframes marqueeRev {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
 .marquee-track {
   animation: marquee 28s linear infinite;
 }
 
-.marquee-track:hover {
+.marquee-track-rev {
+  animation: marqueeRev 34s linear infinite;
+}
+
+.marquee-track:hover,
+.marquee-track-rev:hover {
   animation-play-state: paused;
 }
 
@@ -101,7 +111,8 @@ textarea:focus {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track {
+  .marquee-track,
+  .marquee-track-rev {
     animation: none;
   }
 }

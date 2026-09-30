@@ -54,10 +54,10 @@ export default function Hero() {
               <br />
               PEOPLE
               <br />
-              <span className="inline bg-lime px-1 sm:px-2 box-decoration-clone">REMEMBER.</span>
+              <span className="inline bg-lime px-1 sm:px-2 box-decoration-clone">REMEMBER</span>
             </h1>
             <p className="mt-5 sm:mt-6 max-w-md text-sm sm:text-base text-ink/65 leading-relaxed">
-              From concept to clickable product. I handle the design, code, and polish —
+              From concept to clickable product. I handle the design, code, and polish
               so you can focus on building momentum.
             </p>
             <div className="mt-6 flex flex-wrap gap-2.5">

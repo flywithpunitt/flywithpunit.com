@@ -61,15 +61,15 @@ export default function About() {
               <br />
               the code.
             </h2>
-            <p className="font-headline font-bold text-2xl sm:text-3xl text-ink/90 mb-5">
-              I&apos;m Punit.
+            <p className="font-headline font-bold text-2xl sm:text-3xl text-ink/90 mb-5"> hiii
+              I&apos;m Punit :)
             </p>
             <div className="space-y-4 text-[15px] sm:text-lg text-ink/70 leading-relaxed max-w-2xl">
-              <p>I&apos;m a developer, but that&apos;s probably the least interesting thing about me.</p>
+              <p>I&apos;m a Developer, but that&apos;s probably the least interesting thing about me.</p>
               <p>The code is just one part of the story.</p>
               <p>
                 Before the projects, the clients, the late nights, the wins, and the things I&apos;m still
-                figuring out — there was just a kid who wanted to make something of himself.
+                figuring out - there was just a kid who wanted to make something of himself.
               </p>
               <p>I didn&apos;t have everything figured out. Honestly, I still don&apos;t.</p>
               <p>
