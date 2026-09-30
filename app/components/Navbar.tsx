@@ -14,9 +14,12 @@ const links = [
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     const onScroll = () => setScrolled(window.scrollY > 20)
+    onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -34,15 +37,13 @@ export default function Navbar() {
 
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 mix-blend-difference transition-colors ${
-          scrolled ? 'bg-transparent' : ''
-        }`}
-      >
-        <div className="flex items-center justify-between px-5 sm:px-8 py-5">
+      <header className="fixed top-0 left-0 right-0 z-50">
+        <div className={`flex items-center justify-between px-5 sm:px-8 py-4 sm:py-5 transition-colors ${
+          mounted && scrolled ? 'bg-void/80 backdrop-blur-md border-b border-white/5' : ''
+        }`}>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="font-headline font-extrabold tracking-tight text-2xl text-white"
+            className="font-headline font-extrabold tracking-tight text-xl sm:text-2xl text-paper"
           >
             PUNIT
           </button>
@@ -52,7 +53,7 @@ export default function Navbar() {
               <button
                 key={link.href}
                 onClick={() => go(link.href)}
-                className="text-[11px] font-mono uppercase tracking-[0.22em] text-white/70 hover:text-white transition-colors"
+                className="text-[11px] font-mono uppercase tracking-[0.22em] text-paper/70 hover:text-paper transition-colors"
               >
                 {link.label}
               </button>
@@ -61,7 +62,7 @@ export default function Navbar() {
 
           <button
             onClick={() => setOpen(true)}
-            className="md:hidden text-[11px] font-mono uppercase tracking-[0.22em] text-white"
+            className="md:hidden text-[11px] font-mono uppercase tracking-[0.22em] text-paper"
           >
             Menu
           </button>
