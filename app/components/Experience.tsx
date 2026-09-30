@@ -51,7 +51,7 @@ const jobs = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="relative bg-void/70 text-paper py-24 sm:py-32 px-5 sm:px-8">
+    <section id="experience" className="bg-void text-paper py-24 sm:py-32 px-5 sm:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-baseline justify-between mb-16">
           <span className="font-mono text-xs tracking-[0.28em] uppercase text-lime">04 / Experience</span>

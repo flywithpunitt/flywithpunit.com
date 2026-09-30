@@ -24,7 +24,7 @@ const ticker = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="relative bg-void/70 text-paper py-24 sm:py-32 overflow-hidden">
+    <section id="skills" className="bg-void text-paper py-24 sm:py-32 overflow-hidden">
       <div className="px-5 sm:px-8 max-w-7xl mx-auto mb-16 flex items-baseline justify-between">
         <span className="font-mono text-xs tracking-[0.28em] uppercase text-lime">02 / Skills</span>
         <span className="font-mono text-xs tracking-[0.28em] uppercase text-paper/35">The toolkit</span>

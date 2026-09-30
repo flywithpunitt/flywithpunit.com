@@ -100,55 +100,7 @@ textarea:focus {
   opacity: 0.9;
 }
 
-.site-backdrop {
-  z-index: 0;
-}
-
-.site-grain {
-  opacity: 0.18;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 180px 180px;
-  mix-blend-mode: overlay;
-}
-
-.site-orb {
-  position: absolute;
-  border-radius: 999px;
-  filter: blur(70px);
-  opacity: 0.45;
-}
-
-.site-orb-a {
-  width: 420px;
-  height: 420px;
-  left: -80px;
-  top: 10%;
-  background: rgba(216, 255, 62, 0.28);
-  animation: orbDriftA 18s ease-in-out infinite;
-}
-
-.site-orb-b {
-  width: 520px;
-  height: 520px;
-  right: -120px;
-  bottom: 5%;
-  background: rgba(243, 239, 228, 0.12);
-  animation: orbDriftB 22s ease-in-out infinite;
-}
-
-@keyframes orbDriftA {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(40px, 30px) scale(1.12); }
-}
-
-@keyframes orbDriftB {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-50px, -24px) scale(0.92); }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .site-orb-a,
-  .site-orb-b,
   .marquee-track {
     animation: none;
   }

@@ -22,7 +22,7 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative min-h-screen bg-transparent text-paper px-4 sm:px-6 pt-24 pb-6">
+    <section className="relative min-h-screen bg-void text-paper px-4 sm:px-6 pt-24 pb-6">
       <motion.div
         variants={tiles}
         initial="hidden"
