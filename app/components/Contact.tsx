@@ -11,26 +11,37 @@ const channels = [
 ]
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' })
-  const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
+  const [form, setForm] = useState({ name: '', email: '', message: '', company: '' })
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
+  const [error, setError] = useState('')
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault()
     setStatus('sending')
+    setError('')
 
-    const subject = encodeURIComponent(`Portfolio note from ${form.name}`)
-    const body = encodeURIComponent(
-      `${form.message}\n\n—\n${form.name}\n${form.email}`
-    )
-    window.location.href = `mailto:flywithpunit@gmail.com?subject=${subject}&body=${body}`
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
 
-    window.setTimeout(() => {
+      const data = await res.json().catch(() => ({}))
+
+      if (!res.ok) {
+        setError(data?.error || 'Could not send. Try again or email me directly.')
+        setStatus('error')
+        return
+      }
+
       setStatus('sent')
-      window.setTimeout(() => {
-        setStatus('idle')
-        setForm({ name: '', email: '', message: '' })
-      }, 3600)
-    }, 600)
+      setForm({ name: '', email: '', message: '', company: '' })
+      window.setTimeout(() => setStatus('idle'), 4200)
+    } catch {
+      setError('Network issue. Try again or email me directly.')
+      setStatus('error')
+    }
   }
 
   return (
@@ -78,7 +89,6 @@ export default function Contact() {
         </div>
 
         <div className="grid lg:grid-cols-12 gap-4 sm:gap-5">
-          {/* Channels */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -119,7 +129,6 @@ export default function Contact() {
             </div>
           </motion.div>
 
-          {/* Form */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -138,7 +147,7 @@ export default function Contact() {
                   I&apos;ll write back.
                 </p>
                 <p className="mt-5 text-paper/50 text-sm max-w-sm leading-relaxed">
-                  Your mail client should be open. If nothing popped up, email me directly.
+                  Your note just landed in my inbox.
                 </p>
               </div>
             ) : (
@@ -148,9 +157,21 @@ export default function Contact() {
                     Drop a note
                   </p>
                   <p className="font-mono text-[10px] tracking-wider uppercase text-paper/30">
-                    Opens your email
+                    Goes to my inbox
                   </p>
                 </div>
+
+                {/* Honeypot — hidden from real users */}
+                <input
+                  type="text"
+                  name="company"
+                  value={form.company}
+                  onChange={e => setForm(s => ({ ...s, company: e.target.value }))}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden
+                  className="hidden"
+                />
 
                 <label className="block">
                   <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-paper/40">
@@ -198,13 +219,17 @@ export default function Contact() {
                   />
                 </label>
 
+                {status === 'error' && error && (
+                  <p className="text-sm text-red-300">{error}</p>
+                )}
+
                 <div className="pt-2 flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between">
                   <button
                     type="submit"
                     disabled={status === 'sending'}
                     className="inline-flex items-center justify-center gap-2 rounded-full bg-lime text-ink px-6 py-3.5 font-headline font-bold text-base hover:bg-paper transition-colors disabled:opacity-60"
                   >
-                    {status === 'sending' ? 'Opening mail…' : 'Send it'}
+                    {status === 'sending' ? 'Sending…' : 'Send it'}
                     <span aria-hidden>→</span>
                   </button>
                   <a
